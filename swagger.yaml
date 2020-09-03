@@ -5,6 +5,8 @@ info:
 servers:
 - url: https://statistics-api.azurewebsites.net
   description: The production API server
+- url: https://statistics-api-staging.azurewebsites.net
+  description: The staging API server
 paths:
   /api/statistics/user_activity/:
     get:
