@@ -11,8 +11,7 @@ paths:
   /api/statistics/user_activity/:
     get:
       operationId: listEnrollmentActivityViewSets
-      description: A enrollment ViewSet for listing or retrieving enrollment activity. 
-      This call fetches the entire history of all enrollments activities for kompetanse.udir.no. It is necessary to specify to/from date. Otherwise the call will fail. 
+      description: A enrollment ViewSet for listing or retrieving enrollment activity. This call fetches the entire history of all enrollments activities for kompetanse.udir.no. It is necessary to specify to/from date. Otherwise the call will fail. 
       parameters:         
       - name: from
           in: query
@@ -37,9 +36,7 @@ paths:
   /api/statistics/user_activity/{course_id}/:
     get:
       operationId: retrieveEnrollmentActivityViewSet
-      description: A enrollment ViewSet for listing or retrieving enrollment activity. 
-      This call fetches the entire history of user activity for the specified course. 
-      Its adviced to specify to/from date's for the call so that the data is more approcable. 
+      description: A enrollment ViewSet for listing or retrieving enrollment activity. This call fetches the entire history of user activity for the specified course. Its adviced to specify to/from date's for the call so that the data is more approcable. 
       parameters:
       - - name: course_id
           in: path
