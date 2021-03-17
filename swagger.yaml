@@ -12,8 +12,8 @@ paths:
     get:
       operationId: listEnrollmentActivityViewSets
       description: A enrollment ViewSet for listing or retrieving enrollment activity. This call fetches the entire history of all enrollments activities for kompetanse.udir.no. It is necessary to specify to/from date. Otherwise the call will fail. 
-      parameters:       
-       - name: from
+      parameters: []       
+        -  name: from
           in: query
           required: false
           description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
