@@ -34,7 +34,7 @@ paths:
                 type: array
                 items: {}
           description: ''
-    tags:
+      tags:
       - user_activity
   /api/statistics/user_activity/{id}/:
     get:
