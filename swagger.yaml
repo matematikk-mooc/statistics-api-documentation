@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
-  title: ''
-  version: ''
+  title: 'Statistikk-api-dokumentasjon'
+  version: 'Spekkhoggern_v.1'
 servers:
 - url: https://statistics-api.azurewebsites.net
   description: The production API server
@@ -13,21 +13,15 @@ paths:
       operationId: listEnrollmentActivityViewSets
       description: This api call fetches enrollment activity for the entirety of "kompetanse.udir.no". It is necessary to specify to/from dates. This makes it so that the amount of data requested isnt overwhelming. 
       parameters:
-        - name: course_id
-          in: path
-          required: true
-          description: 'Canvas LMS course ID'
-          schema:
-            type: string
         - name: from
           in: query
-          required: false
+          required: true
           description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
           schema:
             type: string
         - name: to
           in: query
-          required: false
+          required: true
           description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
           schema:
             type: string
@@ -42,7 +36,7 @@ paths:
   /api/statistics/user_activity/{id}/:
     get:
       operationId: retrieveEnrollmentActivityViewSet
-      description: A enrollment ViewSet for listing or retrieving enrollment activity.
+      description: A enrollment ViewSet for listing or retrieving enrollment activity based on the course_id. You can choose to/from dates to further specify what timeperiod you want to see the enrollment acitivty. 
       parameters:
       - name: id
         in: path
@@ -70,7 +64,9 @@ paths:
           description: ''
   /api/statistics/{course_id}/:
     get:
-      description: View enrollment count for a course and number of associated groups aggregated by group category.
+      description: View enrollment count for a course and number of associated groups aggregated by group category. 
+      Here you will see how many indiviuals are enrolled per course. With associated groups and their memeber_count, canvas_id and subgroups. 
+      This call requires a to/from date to be able to fetch the data. Otherwise the data-amount is overwhelming.
       parameters:
         - name: course_id
           in: path
@@ -80,13 +76,13 @@ paths:
             type: string
         - name: from
           in: query
-          required: false
+          required: true
           description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
           schema:
             type: string
         - name: to
           in: query
-          required: false
+          required: true
           description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
           schema:
             type: string
@@ -98,7 +94,7 @@ paths:
           description: ''
   /api/statistics/{course_id}/count:
     get:
-      description: View enrollment count for a course.
+      description: View enrollment count for a course. Here you will see how many people are enrolled in the course. You can also specify which to/from data to narrow down the timeperiod in which the enrollment happened. 
       parameters:
         - name: course_id
           in: path
