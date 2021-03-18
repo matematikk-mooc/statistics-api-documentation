@@ -50,12 +50,6 @@ paths:
         description: ''
         schema:
           type: string
-           - name: course_id
-          in: path
-          required: true
-          description: 'Canvas LMS course ID'
-          schema:
-            type: string
         - name: from
           in: query
           required: false
