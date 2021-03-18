@@ -64,9 +64,7 @@ paths:
           description: ''
   /api/statistics/{course_id}/:
     get:
-      description: View enrollment count for a course and number of associated groups aggregated by group category. 
-      Here you will see how many indiviuals are enrolled per course. With associated groups and their memeber_count, canvas_id and subgroups. 
-      This call requires a to/from date to be able to fetch the data. Otherwise the data-amount is overwhelming.
+      description: View enrollment count for a course and number of associated groups aggregated by group category. Here you will see how many indiviuals are enrolled per course. With associated groups and their memeber_count, canvas_id and subgroups. This call requires a to/from date to be able to fetch the data. Otherwise the data-amount is overwhelming.
       parameters:
         - name: course_id
           in: path
