@@ -1,18 +1,32 @@
 openapi: 3.0.2
 info:
-  title: 'statistics API Documentation'
-  version: 'version: Spekkhoggern'
+  title: 'Statistikk-api-dokumentasjon'
+  version: 'Spekkhoggern_v.1'
 servers:
 - url: https://statistics-api.azurewebsites.net
   description: The production API server
 - url: https://statistics-api-staging.azurewebsites.net
   description: The staging API server
+
 paths:
   /api/statistics/user_activity/:
     get:
       operationId: listEnrollmentActivityViewSets
-      description: A enrollment ViewSet for listing or retrieving enrollment activity. This call fetches the entire history of all enrollments activities for kompetanse.udir.no. It is necessary to specify to/from date. Otherwise the call will fail. 
-      parameters:  []
+      description: This api call fetches enrollment activity for the entirety of "kompetanse.udir.no". It is necessary to specify to/from dates. This makes it so that the amount of data requested isnt overwhelming. 
+      parameters:
+        - name: from
+          in: query
+          required: true
+          description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+        - name: to
+          in: query
+          required: true
+          description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+
       responses:
         '200':
           content:
@@ -21,10 +35,13 @@ paths:
                 type: array
                 items: {}
           description: ''
-  /api/statistics/user_activity/{course_id}/:
+
+      tags:
+      - User_activity
+  /api/statistics/user_activity/{id}/:
     get:
       operationId: retrieveEnrollmentActivityViewSet
-      description: A enrollment ViewSet for listing or retrieving enrollment activity. This call fetches the entire history of user activity for the specified course. Its adviced to specify to/from date's for the call so that the data is more approcable. 
+      description: A enrollment ViewSet for listing or retrieving enrollment activity based on the course_id. You can choose to/from dates to further specify what timeperiod you want to see the enrollment acitivty. 
       parameters:
         - name: course_id
           in: path
@@ -44,15 +61,29 @@ paths:
           description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
         schema:
           type: string
+      - name: from
+        in: query
+        required: false
+        description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
+        schema:
+          type: string
+      - name: to
+        in: query
+        required: false
+        description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
+        schema:
+          type: string
       responses:
         '200':
           content:
             application/json:
               schema: {}
           description: ''
+      tags:
+      - User_activity
   /api/statistics/{course_id}/:
     get:
-      description: View enrollment count for a course and number of associated groups aggregated by group category.
+      description: View enrollment count for a course and number of associated groups aggregated by group category. Here you will see how many indiviuals are enrolled per course. With associated groups and their memeber_count, canvas_id and subgroups. This call requires a to/from date to be able to fetch the data. Otherwise the data-amount is overwhelming.
       parameters:
         - name: course_id
           in: path
@@ -62,13 +93,13 @@ paths:
             type: string
         - name: from
           in: query
-          required: false
+          required: true
           description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
           schema:
             type: string
         - name: to
           in: query
-          required: false
+          required: true
           description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
           schema:
             type: string
@@ -78,9 +109,11 @@ paths:
             application/json:
               schema: {}
           description: ''
+      tags:
+      - Course_id
   /api/statistics/{course_id}/count:
     get:
-      description: View enrollment count for a course.
+      description: View enrollment count for a course. Here you will see how many people are enrolled in the course. You can also specify which to/from data to narrow down the timeperiod in which the enrollment happened. 
       parameters:
         - name: course_id
           in: path
@@ -106,9 +139,11 @@ paths:
             application/json:
               schema: {}
           description: ''
+      tags:
+      - Course_id
   /api/statistics/groupCategory/{group_category_id}:
     get:
-      description: View all Canvas LMS groups associated with a group category
+      description: View all Canvas LMS groups associated with a group category. Here you will find all groups that exist within a specifc group category. By using the group_category_id which can be found in "kompetanse.udir.no" under "people". You can limit the search by using to/from dates if you want to see number of groups in a specific timeline. 
       parameters:
         - name: group_category_id
           in: path
@@ -134,9 +169,11 @@ paths:
             application/json:
               schema: {}
           description: ''
+      tags:
+      - Group_category_id
   /api/statistics/groupCategory/{group_category_id}/count:
     get:
-      description: View the number of Canvas LMS groups associated with a group category
+      description: View the number of Canvas LMS groups associated with a group category. Here you will find a summary of the number of canvas LMS groups associated wit a specific group_category_id. You can limit the search by using to/from dates if you want to see number of groups in a specific timeline. 
       parameters:
         - name: group_category_id
           in: path
@@ -162,9 +199,11 @@ paths:
             application/json:
               schema: {}
           description: ''
+      tags:
+      - Group_category_id
   /api/statistics/primary_schools/municipality/{municipality_id}/course/{course_id}:
     get:
-      description: View enrollment percentage of teachers at primary schools in specified municipality
+      description: View enrollment percentage of teachers at primary schools in specified municipality. Here you will find the enrollment percentage category of techers at primary schools in a specified munciilaity and course. You can limit the search by using to/from dates if you want see a specific timeline. Likewise you can also limit the search by specifying what enrollment_percentage_categories you want filtered. 
       parameters:
         - name: municipality_id
           in: path
@@ -202,9 +241,11 @@ paths:
             application/json:
               schema: {}
           description: ''
+      tags:
+      - Municipality
   /api/statistics/primary_schools/county/{county_id}/course/{course_id}:
     get:
-      description: View enrollment percentage of teachers at primary schools in specified county
+      description: View enrollment percentage of teachers at primary schools in specified county. Here you will find the enrollment percentage category of techers at primary schools in a specified county and course. You can limit the search by using to/from dates if you want see a specific timeline. Likewise you can also limit the search by specifying what enrollment_percentage_categories you want filtered. The last filter oppertunity in this call is to either show schools. Showing schools gives you the data displayed on school level, disbeling this gives you a overview on the municipality level.  
       parameters:
         - name: county_id
           in: path
@@ -248,9 +289,11 @@ paths:
             application/json:
               schema: {}
           description: ''
+      tags:
+      - County
   /api/statistics/high_schools/county/{county_id}/course/{course_id}:
     get:
-      description: View enrollment percentage of high schools teachers in specified county
+      description: View enrollment percentage of high schools teachers in specified county. Here you will find the data for high_schools in a specified county and course id.  You can limit the search by using to/from dates if you want so see a specific timeline. 
       parameters:
         - name: county_id
           in: path
@@ -282,3 +325,5 @@ paths:
             application/json:
               schema: {}
           description: ''
+      tags:
+      - County
