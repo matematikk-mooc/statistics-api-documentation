@@ -26,6 +26,7 @@ paths:
           description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
           schema:
             type: string
+
       responses:
         '200':
           content:
@@ -34,6 +35,7 @@ paths:
                 type: array
                 items: {}
           description: ''
+
       tags:
       - User_activity
   /api/statistics/user_activity/{id}/:
@@ -41,10 +43,22 @@ paths:
       operationId: retrieveEnrollmentActivityViewSet
       description: A enrollment ViewSet for listing or retrieving enrollment activity based on the course_id. You can choose to/from dates to further specify what timeperiod you want to see the enrollment acitivty. 
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: ''
+        - name: course_id
+          in: path
+          required: true
+          description: 'Canvas LMS course ID'
+          schema:
+            type: string
+        - name: from
+          in: query
+          required: false
+          description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+        - name: to
+          in: query
+          required: false
+          description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
         schema:
           type: string
       - name: from
