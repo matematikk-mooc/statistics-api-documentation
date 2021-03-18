@@ -50,18 +50,18 @@ paths:
         description: ''
         schema:
           type: string
-        - name: from
-          in: query
-          required: false
-          description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
-          schema:
-            type: string
-        - name: to
-          in: query
-          required: false
-          description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
-          schema:
-            type: string
+      - name: from
+        in: query
+        required: false
+        description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
+        schema:
+          type: string
+      - name: to
+        in: query
+        required: false
+        description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
+        schema:
+          type: string
       responses:
         '200':
           content:
