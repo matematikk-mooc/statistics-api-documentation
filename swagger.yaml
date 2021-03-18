@@ -11,8 +11,26 @@ paths:
   /api/statistics/user_activity/:
     get:
       operationId: listEnrollmentActivityViewSets
-      description: A enrollment ViewSet for listing or retrieving enrollment activity.
-      parameters: []
+      description: This api call fetches enrollment activity for the entirety of "kompetanse.udir.no". It is necessary to specify to/from dates. This makes it so that the amount of data requested isnt overwhelming. 
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: 'Canvas LMS course ID'
+          schema:
+            type: string
+        - name: from
+          in: query
+          required: false
+          description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+        - name: to
+          in: query
+          required: false
+          description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
       responses:
         '200':
           content:
@@ -32,6 +50,24 @@ paths:
         description: ''
         schema:
           type: string
+           - name: course_id
+          in: path
+          required: true
+          description: 'Canvas LMS course ID'
+          schema:
+            type: string
+        - name: from
+          in: query
+          required: false
+          description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+        - name: to
+          in: query
+          required: false
+          description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
       responses:
         '200':
           content:
