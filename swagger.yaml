@@ -7,6 +7,8 @@ servers:
   description: The production API server
 - url: https://statistics-api-staging.azurewebsites.net
   description: The staging API server
+
+tags: testing tags
 paths:
   /api/statistics/user_activity/:
     get:
