@@ -59,7 +59,7 @@ paths:
           in: query
           required: false
           description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
-        schema:
+          schema:
           type: string
       - name: from
         in: query
