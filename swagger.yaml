@@ -38,7 +38,7 @@ paths:
 
       tags:
       - User_activity
-  /api/statistics/user_activity/{id}/:
+  /api/statistics/user_activity/{course_id}/:
     get:
       operationId: retrieveEnrollmentActivityViewSet
       description: A enrollment ViewSet for listing or retrieving enrollment activity based on the course_id. You can choose to/from dates to further specify what timeperiod you want to see the enrollment acitivty. 
