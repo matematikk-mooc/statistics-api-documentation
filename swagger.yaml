@@ -362,4 +362,82 @@ paths:
               schema: {}
           description: ''
       tags:
-      - Quiz    
+      - Quiz
+  /api/statistics/visits:
+    get:
+      description: View total visist statistics. Here you will find statitistics for each date (opptionally specified between two dates), information includes unique visits, returning visitors, sum length of all visits etc.
+      parameters:
+        - name: from
+          in: query
+          required: false
+          description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+        - name: to
+          in: query
+          required: false
+          description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - Visitors_statistics
+  /api/statistics/pages:
+    get:
+      description: View total visist statistics for each page. Here you will find statitistics for each date (opptionally specified between two dates), information includes unique visits, returning visitors, sum length of all visits etc. Lots of data, recommended specifying dates. 
+      parameters:
+        - name: from
+          in: query
+          required: false
+          description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+        - name: to
+          in: query
+          required: false
+          description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - Visitors_statistics
+  /api/statistics/course/{course_id}/pages:
+    get:
+      description: View total visist statistics for each page in a specified course. Here you will find statitistics for each date (opptionally specified between two dates), information includes unique visits, returning visitors, sum length of all visits etc.
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: 'Canvas LMS course ID'
+          schema:
+            type: string
+        - name: from
+          in: query
+          required: false
+          description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+        - name: to
+          in: query
+          required: false
+          description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - Visitors_statistics    
