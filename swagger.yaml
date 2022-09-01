@@ -119,7 +119,7 @@ paths:
       - Course_id
   /api/statistics/groupCategory/{group_category_id}:
     get:
-      description: View all Canvas LMS groups associated with a group category. Here you will find all groups that exist within a specifc group category. By using the group_category_id which can be found in "kompetanse.udir.no" under "people". You can limit the search by using to/from dates if you want to see number of groups in a specific timeline. 
+      description: View all Canvas LMS groups associated with a group category. Here you will find all groups that exist within a specifc group category. By using the group_category_id which can be found in "kompetanse.udir.no" under "people". You can limit the search by using to/from dates if you want to see number of groups in a specific timeline. Member count for groups wih 5 or fewer members will be anonymized and show a member count = 0.  
       parameters:
         - name: group_category_id
           in: path
@@ -139,6 +139,12 @@ paths:
           description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
           schema:
             type: string
+        - name: aggregated
+          in: query
+          required: false
+          description: 'Aggregated true will limit the results to groups with 5 or fewer members. Aggregated false will limit result to groups with more than 5 members. Not included will show all groups.'
+          schema:
+            type: boolean
       responses:
         '200':
           content:
@@ -303,3 +309,123 @@ paths:
           description: ''
       tags:
       - County
+  /api/statistics/course/{course_id}/quizzes:
+    get:
+      description: View statistics for all quizzes in a specified course. Here you will find number of responses on answeralternatives for questions in the quizzes.
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: 'Canvas LMS course ID'
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - Quiz
+  /api/statistics/course/{course_id}/quiz/{quiz_id}:
+    get:
+      description: View statistics for a specicfied quiz in a specified course. Here you will find number of responses on answeralternatives for questions in the specified quiz. 
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: 'Canvas LMS course ID'
+          schema:
+            type: string
+        - name: quiz_id
+          in: path
+          required: true
+          description: 'Canvas LMS quiz ID'
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - Quiz
+  /api/statistics/visits:
+    get:
+      description: View total visist statistics. Here you will find statitistics for each date (opptionally specified between two dates), information includes unique visits, returning visitors, sum length of all visits etc.
+      parameters:
+        - name: from
+          in: query
+          required: false
+          description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+        - name: to
+          in: query
+          required: false
+          description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - Visitors_statistics
+  /api/statistics/pages:
+    get:
+      description: View total visist statistics for each page. Here you will find statitistics for each date (opptionally specified between two dates), information includes unique visits, returning visitors, sum length of all visits etc. Lots of data, recommended specifying dates. 
+      parameters:
+        - name: from
+          in: query
+          required: false
+          description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+        - name: to
+          in: query
+          required: false
+          description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - Visitors_statistics
+  /api/statistics/course/{course_id}/pages:
+    get:
+      description: View total visist statistics for each page in a specified course. Here you will find statitistics for each date (opptionally specified between two dates), information includes unique visits, returning visitors, sum length of all visits etc.
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: 'Canvas LMS course ID'
+          schema:
+            type: string
+        - name: from
+          in: query
+          required: false
+          description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+        - name: to
+          in: query
+          required: false
+          description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - Visitors_statistics    
