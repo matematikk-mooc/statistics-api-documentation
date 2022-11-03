@@ -311,7 +311,7 @@ paths:
       - County
   /api/statistics/course/{course_id}/quizzes:
     get:
-      description: View statistics for all quizzes in a specified course. Here you will find number of responses on answeralternatives for questions in the quizzes.
+      description: View statistics for all quizzes in a specified course. Here you will find number of responses on answeralternatives for questions in the quizzes. You will also see response count per group.
       parameters:
         - name: course_id
           in: path
@@ -329,7 +329,7 @@ paths:
       - Quiz
   /api/statistics/course/{course_id}/quiz/{quiz_id}:
     get:
-      description: View statistics for a specicfied quiz in a specified course. Here you will find number of responses on answeralternatives for questions in the specified quiz. 
+      description: View statistics for a specicfied quiz in a specified course. Here you will find number of responses on answeralternatives for questions in the specified quiz. You will also see response count per group. 
       parameters:
         - name: course_id
           in: path
