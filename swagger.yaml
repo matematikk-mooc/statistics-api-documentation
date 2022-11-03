@@ -428,4 +428,22 @@ paths:
               schema: {}
           description: ''
       tags:
-      - Visitors_statistics    
+      - Visitors_statistics
+  /api/statistics/{course_id}/modules:
+    get:
+      description: View finnish marks per group for module items in a course. Here you will see how many people per group in the course that has completed each module item.
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: 'Canvas LMS course ID'
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - Modules    
