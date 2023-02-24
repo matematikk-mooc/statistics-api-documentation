@@ -397,6 +397,12 @@ paths:
           description: 'Canvas LMS course ID'
           schema:
             type: string
+        - name: group
+          in: query
+          required: false
+          description: 'The group_id you want to get finnish marks from.'
+          schema:
+            type: int
       responses:
         '200':
           content:
