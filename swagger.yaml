@@ -402,7 +402,7 @@ paths:
           required: false
           description: 'The group_id you want to get finnish marks from.'
           schema:
-            type: int
+            type: integer
       responses:
         '200':
           content:
