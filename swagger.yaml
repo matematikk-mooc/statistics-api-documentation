@@ -12,7 +12,7 @@ paths:
   /api/statistics/user_activity/:
     get:
       operationId: listEnrollmentActivityViewSets
-      description: This api call fetches enrollment activity for the entirety of "kompetanse.udir.no". It is necessary to specify to/from dates. This makes it so that the amount of data requested isnt overwhelming. 
+      description: This api call fetches enrollment activity for the entirety of "kompetanse.udir.no". It is necessary to specify to/from dates. This makes it so that the amount of data requested isnt overwhelming.
       parameters:
         - name: from
           in: query
@@ -41,7 +41,7 @@ paths:
   /api/statistics/user_activity/{course_id}/:
     get:
       operationId: retrieveEnrollmentActivityViewSet
-      description: A enrollment ViewSet for listing or retrieving enrollment activity based on the course_id. You can choose to/from dates to further specify what timeperiod you want to see the enrollment acitivty. 
+      description: A enrollment ViewSet for listing or retrieving enrollment activity based on the course_id. You can choose to/from dates to further specify what timeperiod you want to see the enrollment acitivty.
       parameters:
         - name: course_id
           in: path
@@ -101,7 +101,7 @@ paths:
       - Course_id
   /api/statistics/{course_id}/count:
     get:
-      description: View enrollment count for a course. Here you will see how many people are enrolled in the course. You can also specify which to/from data to narrow down the timeperiod in which the enrollment happened. 
+      description: View enrollment count for a course. Here you will see how many people are enrolled in the course. You can also specify which to/from data to narrow down the timeperiod in which the enrollment happened.
       parameters:
         - name: course_id
           in: path
@@ -119,7 +119,7 @@ paths:
       - Course_id
   /api/statistics/groupCategory/{group_category_id}:
     get:
-      description: View all Canvas LMS groups associated with a group category. Here you will find all groups that exist within a specifc group category. By using the group_category_id which can be found in "kompetanse.udir.no" under "people". You can limit the search by using to/from dates if you want to see number of groups in a specific timeline. Member count for groups wih 5 or fewer members will be anonymized and show a member count = 0.  
+      description: View all Canvas LMS groups associated with a group category. Here you will find all groups that exist within a specifc group category. By using the group_category_id which can be found in "kompetanse.udir.no" under "people". You can limit the search by using to/from dates if you want to see number of groups in a specific timeline. Member count for groups wih 5 or fewer members will be anonymized and show a member count = 0.
       parameters:
         - name: group_category_id
           in: path
@@ -155,7 +155,7 @@ paths:
       - Group_category_id
   /api/statistics/groupCategory/{group_category_id}/count:
     get:
-      description: View the number of Canvas LMS groups associated with a group category. Here you will find a summary of the number of canvas LMS groups associated wit a specific group_category_id. You can limit the search by using to/from dates if you want to see number of groups in a specific timeline. 
+      description: View the number of Canvas LMS groups associated with a group category. Here you will find a summary of the number of canvas LMS groups associated wit a specific group_category_id. You can limit the search by using to/from dates if you want to see number of groups in a specific timeline.
       parameters:
         - name: group_category_id
           in: path
@@ -185,7 +185,7 @@ paths:
       - Group_category_id
   /api/statistics/primary_schools/municipality/{municipality_id}/course/{course_id}:
     get:
-      description: View enrollment percentage of teachers at primary schools in specified municipality. Here you will find the enrollment percentage category of techers at primary schools in a specified munciilaity and course. You can limit the search by using to/from dates if you want see a specific timeline. Likewise you can also limit the search by specifying what enrollment_percentage_categories you want filtered. 
+      description: View enrollment percentage of teachers at primary schools in specified municipality. Here you will find the enrollment percentage category of techers at primary schools in a specified munciilaity and course. You can limit the search by using to/from dates if you want see a specific timeline. Likewise you can also limit the search by specifying what enrollment_percentage_categories you want filtered.
       parameters:
         - name: municipality_id
           in: path
@@ -227,7 +227,7 @@ paths:
       - Municipality
   /api/statistics/primary_schools/county/{county_id}/course/{course_id}:
     get:
-      description: View enrollment percentage of teachers at primary schools in specified county. Here you will find the enrollment percentage category of techers at primary schools in a specified county and course. You can limit the search by using to/from dates if you want see a specific timeline. Likewise you can also limit the search by specifying what enrollment_percentage_categories you want filtered. The last filter oppertunity in this call is to either show schools. Showing schools gives you the data displayed on school level, disbeling this gives you a overview on the municipality level.  
+      description: View enrollment percentage of teachers at primary schools in specified county. Here you will find the enrollment percentage category of techers at primary schools in a specified county and course. You can limit the search by using to/from dates if you want see a specific timeline. Likewise you can also limit the search by specifying what enrollment_percentage_categories you want filtered. The last filter oppertunity in this call is to either show schools. Showing schools gives you the data displayed on school level, disbeling this gives you a overview on the municipality level.
       parameters:
         - name: county_id
           in: path
@@ -275,7 +275,7 @@ paths:
       - County
   /api/statistics/high_schools/county/{county_id}/course/{course_id}:
     get:
-      description: View enrollment percentage of high schools teachers in specified county. Here you will find the data for high_schools in a specified county and course id.  You can limit the search by using to/from dates if you want so see a specific timeline. 
+      description: View enrollment percentage of high schools teachers in specified county. Here you will find the data for high_schools in a specified county and course id.  You can limit the search by using to/from dates if you want so see a specific timeline.
       parameters:
         - name: county_id
           in: path
@@ -335,7 +335,7 @@ paths:
       - Visitors_statistics
   /api/statistics/pages:
     get:
-      description: View total visist statistics for each page. Here you will find statitistics for each date (opptionally specified between two dates), information includes unique visits, returning visitors, sum length of all visits etc. Lots of data, recommended specifying dates. 
+      description: View total visist statistics for each page. Here you will find statitistics for each date (opptionally specified between two dates), information includes unique visits, returning visitors, sum length of all visits etc. Lots of data, recommended specifying dates.
       parameters:
         - name: from
           in: query
@@ -410,4 +410,64 @@ paths:
               schema: {}
           description: ''
       tags:
-      - Modules    
+      - Modules
+
+  /api/total_students/{course_id}:
+    get:
+      description: Here you will see the total number of enrolled students in a course each day. You can limit the search by using to/from dates if you want to see a specific timeline.
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: 'Canvas LMS course ID'
+          schema:
+            type: string
+        - name: from
+          in: query
+          required: false
+          description: 'Limit results to dates later than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+        - name: to
+          in: query
+          required: false
+          description: 'Limit results to earlier than specified date. Format is YYYY-MM-DD.'
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+        - Total students
+  /api/total_students/current:
+    get:
+      description: Here you will see the total number of enrolled students in each course. This is the current (current date) number of students enrolled in the course.
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - Total students
+  /api/total_students/current/{course_id}:
+    get:
+      description: Here you will see the total number of enrolled students for a given course. This is the current (current date) number of students enrolled in the course.
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: 'Canvas LMS course ID'
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - Total students
