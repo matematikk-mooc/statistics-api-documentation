@@ -471,3 +471,51 @@ paths:
           description: ''
       tags:
       - Total students
+  /api/statistics/registrations/{course_id}:
+    get:
+      description: Here you will see the number of new registrations in a course and its groups for a given period (last day, last week, and last month).
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: 'Canvas LMS course ID'
+          schema:
+            type: string
+        - name: period
+          in: query
+          required: true
+          description: 'The period you want to see the registrations for. Possible values are: day, week, month.'
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - Recent registrations
+  /api/statistics/registrations/{course_id}/leaders:
+    get:
+      description: Here you will see the number of new registrations in leader groups in a given course for a given period (last day, last week, and last month).
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: 'Canvas LMS course ID'
+          schema:
+            type: string
+        - name: period
+          in: query
+          required: true
+          description: 'The period you want to see the registrations for. Possible values are: day, week, month.'
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - Recent registrations
