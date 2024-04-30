@@ -4,11 +4,12 @@ on:
     - cron:  '0 10 * * *'
   repository_dispatch:
     types: [update-swagger-ui]
+  workflow_dispatch:
 jobs:
   updateSwagger:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Get Latest Swagger UI Release
         id: swagger-ui
         run: |
